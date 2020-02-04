@@ -1,15 +1,20 @@
 const cityInput = document.getElementById('city-input');
 const searchBtn = document.getElementById('search-btn');
+const img = document.getElementById('img');
 const city = document.getElementById('city');
 const description = document.getElementById('description');
 const temp = document.getElementById('temp');
 const humidity = document.getElementById('humidity');
 const changeTempBtn = document.getElementById('change-temp');
 const weatherDiv = document.getElementById('weather-data');
+const errorMsg = document.getElementById('error-msg');
 let tempHolder = 0;
 
 const displayWeatherData = (data) => {
   if (data.cod === '200') {
+    errorMsg.classList = 'd-none';
+    img.src = `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+    img.style = 'height: 5rem; width: 5rem';
     city.innerHTML = data.city.name;
     description.innerHTML = data.list[0].weather[0].description;
     tempHolder = data.list[0].main.temp;
@@ -18,9 +23,9 @@ const displayWeatherData = (data) => {
     changeTempBtn.innerHTML = 'Change temperature to Fahrenheit';
     weatherDiv.classList = '';
   } else {
-    cityInput.value = '';
-    alert('City not found');
+    errorMsg.classList = 'text-danger font-weight-bold ml-3';
   }
+  cityInput.value = '';
 };
 
 const getWeatherData = async (cityValue) => {
