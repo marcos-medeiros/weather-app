@@ -8,12 +8,6 @@ const changeTempBtn = document.getElementById('change-temp');
 const weatherDiv = document.getElementById('weather-data');
 let tempHolder = 0;
 
-const getWeatherData = async (cityValue) => {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=52119e88a31d7d889fe0c2dc770ee44b&units=metric&q=${cityValue}`);
-  const weatherJSON = await response.json();
-  await displayWeatherData(weatherJSON);
-};
-
 const displayWeatherData = (data) => {
   if (data.cod === '200') {
     city.innerHTML = data.city.name;
@@ -24,8 +18,15 @@ const displayWeatherData = (data) => {
     changeTempBtn.innerHTML = 'Change temperature to Fahrenheit';
     weatherDiv.classList = '';
   } else {
+    cityInput.value = '';
     alert('City not found');
   }
+};
+
+const getWeatherData = async (cityValue) => {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=52119e88a31d7d889fe0c2dc770ee44b&units=metric&q=${cityValue}`);
+  const weatherJSON = await response.json();
+  await displayWeatherData(weatherJSON);
 };
 
 const convertTemp = () => {
