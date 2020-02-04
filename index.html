@@ -20,17 +20,23 @@
         <label class="sr-only">Name</label>
         <input type="text" class="form-control mb-2 mr-sm-2" id="city-input" placeholder="Your city here...">
         <a class="btn btn-primary btn mb-2" id="search-btn" role="button">Search</a>
+        <p id='error-msg' class='d-none'>City not found!</p>
       </form>  
       </p>
     </div>
     <div id='weather-data' class='d-none'>
-      <div class="card">
+      <div class="card bg-dark">
+        <img src="" class="card-img-top" id='img'>
         <div class="card-body">
-          <h5 class="card-title" id='city'></h5>
-          <p class="card-text" id='description'></p>
-          <p class="card-text" id='temp'></p>
-          <p class="card-text" id='humidity'></p>
-          <a href="#" class="btn btn-primary" id='change-temp'></a>
+          <h5 class="card-title text-primary" id='city'></h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-secondary text-white" id='description'></li>
+            <li class="list-group-item bg-secondary text-white" id='temp'></li>
+            <li class="list-group-item bg-secondary text-white" id='humidity'></li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link text-primary" id='change-temp'></a>
+          </div>
         </div>
       </div>
     </div>
