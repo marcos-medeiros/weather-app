@@ -32,7 +32,7 @@ git clone https://github.com/marcos-medeiros/weather-app.git
 👤 **Marcos Medeiros**
 
 - Github: [@marcos-medeiros](https://github.com/marcos-medeiros)
-- [Linkedin](https://www.linkedin.com/in/marcos-medeiros-6a079a18a/)
+- [Linkedin](https://www.linkedin.com/in/marcosmedeiros-dev/)
 
 
 ## Show your support
