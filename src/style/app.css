@@ -1,0 +1,106 @@
+body {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  padding: 1vw;
+  margin: 0;
+}
+
+#dashboard {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+aside {
+  background-color: #202224;
+  max-height: 100%;
+  max-width: 100%;
+  padding: 2vw;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  color: #f18f01;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1vw;
+}
+
+aside button {
+  color: #f18f01 !important;
+}
+
+aside img {
+  width: 100%;
+  margin-bottom: 3vw;
+}
+
+.aside-div {
+  max-width: 85%;
+  margin: auto;
+}
+
+#search-bar {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  margin-bottom: 3vw !important;
+}
+
+main {
+  background-color: #565857;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.card {
+  background-color: #202224;
+  font-weight: bold;
+  text-align: center;
+}
+
+.min-week {
+  color: #2f4550
+}
+
+.max-week {
+  color: #b23e3e;
+}
+
+.card-title {
+  color: #f18f01;
+}
+
+.main-title {
+  color: #f18f01;
+  font-size: 2em;
+  margin-top: 1.5vw;
+}
+
+#toggle-temperature {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+}
+
+#toggle-temperature .active {
+  color: #202224;
+  background-color: #f18f01;
+  border-color: #f18f01;
+}
+
+#toggle-temperature .active:hover {
+  color: #202224;
+  background-color: #f18f01;
+  border-color: #f18f01;
+}
+
+#toggle-temperature label {
+  color: #f18f01;
+  background-color: #202224;
+  border-color: #202224;
+}
+
+#toggle-temperature label:hover {
+  color: #f18f01;
+  background-color: #202224;
+  border-color: #f18f01;
+}
