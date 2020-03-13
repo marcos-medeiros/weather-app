@@ -92,3 +92,8 @@ body {
 #switch-div {
   height: 20px;
 }
+
+#initial-message {
+  font-size: 2em;
+  padding-top: 2em;
+}

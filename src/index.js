@@ -1,4 +1,3 @@
-
 const tempSwitch = document.getElementById('temp-switch');
 const searchInput = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-button');
@@ -9,6 +8,8 @@ const todayFeelsLike = document.getElementById('today-feels-like');
 const todayHumidity = document.getElementById('today-humidity');
 const errorMsg = document.getElementById('error-msg');
 const weatherToday = document.getElementById('weather-info');
+const wrapper = document.getElementById('wrapper');
+const initialMsg = document.getElementById('initial-message');
 
 let tempFormat = '°C';
 
@@ -58,7 +59,7 @@ const capitalizeFirst = (string) => {
 
 const setWeatherData = (data) => {
   if (data.cod === '200') {
-    
+
     errorMsg.classList = 'd-none';
 
     highlights['todayMax'] = data.list[0].main.temp_max.toFixed(1);
@@ -71,7 +72,7 @@ const setWeatherData = (data) => {
     };
 
     if (tempFormat === '°F') {
-      Object.keys(temperatures).forEach((key) => { 
+      Object.keys(temperatures).forEach((key) => {
         temperatures[key] = ((temperatures[key] * (9 / 5)) + 32).toFixed(1);
       });
 
@@ -90,10 +91,14 @@ const setWeatherData = (data) => {
     };
 
     cityName.innerHTML = data.city.name + ' today';
+
+    wrapper.classList.remove('d-none');
+
   } else {
 
-    errorMsg.classList = 'text-danger font-weight-bold ml-3';
+    errorMsg.classList = 'text-danger font-weight-bold mx-auto';
   }
+  initialMsg.classList.add("d-none");
   searchInput.value = '';
 };
 
@@ -116,12 +121,6 @@ const renderWeatherData = () => {
   todayFeelsLike.innerHTML = `${highlights['todayFeelsLike']} ${tempFormat}`;
   todayHumidity.innerHTML = `${highlights['todayHumidity']}%`;
 
-  if (tempFormat === '°F') {
-    tempSwitch.checked = true;
-  } else {
-    tempSwitch.checked = false;
-  }
-
 };
 
 const getWeatherData = async (cityValue) => {
@@ -135,7 +134,7 @@ searchBtn.addEventListener('click', () => {
   getWeatherData(searchInput.value);
 });
 
-searchInput.addEventListener('keypress', (e) =>  {
+searchInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     getWeatherData(searchInput.value);
   }
@@ -159,10 +158,10 @@ const translateDay = (dayIndex) => {
 };
 
 
-tempSwitch.addEventListener( 'click', () => {
-  
-  if(tempFormat === '°C') {
-    Object.keys(temperatures).forEach((key) => { 
+tempSwitch.addEventListener('click', () => {
+
+  if (tempFormat === '°C') {
+    Object.keys(temperatures).forEach((key) => {
       temperatures[key] = ((temperatures[key] * (9 / 5)) + 32).toFixed(1);
     });
 
@@ -174,7 +173,7 @@ tempSwitch.addEventListener( 'click', () => {
 
   } else {
 
-    Object.keys(temperatures).forEach((key) => { 
+    Object.keys(temperatures).forEach((key) => {
       temperatures[key] = ((temperatures[key] - 32) * (5 / 9)).toFixed(1);
     });
 
