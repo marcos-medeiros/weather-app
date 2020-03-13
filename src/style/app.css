@@ -1,106 +1,94 @@
 body {
-  background-color: black;
+  background-color: #353535;
   width: 100vw;
   height: 100vh;
-  padding: 1vw;
-  margin: 0;
 }
 
 #dashboard {
-  height: 100%;
   width: 100%;
-  margin: 0;
-}
-
-aside {
-  background-color: #202224;
-  max-height: 100%;
-  max-width: 100%;
-  padding: 2vw;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  color: #f18f01;
+  height: 100vh;
+  padding: 1em;
+  background-color: #ffffff;
+  color: #343A40;
   font-weight: bold;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1vw;
-}
-
-aside button {
-  color: #f18f01 !important;
-}
-
-aside img {
-  width: 100%;
-  margin-bottom: 3vw;
-}
-
-.aside-div {
-  max-width: 85%;
-  margin: auto;
+  overflow-y: scroll;
 }
 
 #search-bar {
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin-bottom: 3vw !important;
+  max-width: 80%;
+  margin: 1em auto;
 }
 
-main {
-  background-color: #565857;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
-
-.card {
-  background-color: #202224;
+#search-button {
+  color: #EC6F4D;
   font-weight: bold;
-  text-align: center;
 }
 
-.min-week {
-  color: #2f4550
+.weather-info {
+  width: 80%; 
+  background-color: #ccc9a1;
+  border-radius: 10px;
+  color: #343A40;
 }
 
-.max-week {
-  color: #b23e3e;
+.weather-info p {
+  margin-top: 1em;
+}
+
+#error-msg {
+  width: 80%;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #f28f3b;
+}
+
+.section {
+  width: 80%;
+  margin: 1em auto;
+  position: relative;
 }
 
 .card-title {
-  color: #f18f01;
+  font-size: 1em;
 }
 
-.main-title {
-  color: #f18f01;
-  font-size: 2em;
-  margin-top: 1.5vw;
+.fa-thermometer-half {
+  color: #f28f3b;
 }
 
-#toggle-temperature {
+.fa-tint {
+  color: #0e6ba8;
+}
+
+.fa-caret-up {
+  color: #157f1f;
+}
+
+.fa-caret-down {
+  color: #74121d;
+}
+
+.fa-wind {
+  color: #f28f3b;
+}
+
+.custom-control {
   position: absolute;
-  top: 2em;
-  right: 2em;
+  right: 0;
+  top: 0;
+}
+.custom-control-label {
+  color: #f28f3b;
 }
 
-#toggle-temperature .active {
-  color: #202224;
-  background-color: #f18f01;
-  border-color: #f18f01;
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #f28f3b;
+  background-color: #f28f3b;
 }
 
-#toggle-temperature .active:hover {
-  color: #202224;
-  background-color: #f18f01;
-  border-color: #f18f01;
-}
-
-#toggle-temperature label {
-  color: #f18f01;
-  background-color: #202224;
-  border-color: #202224;
-}
-
-#toggle-temperature label:hover {
-  color: #f18f01;
-  background-color: #202224;
-  border-color: #f18f01;
+#switch-div {
+  height: 20px;
 }
