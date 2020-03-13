@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Weather App by Marcos Medeiros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/4ea4aea9be.js" crossorigin="anonymous"></script>
@@ -12,146 +13,162 @@
 </head>
 
 <body>
-  <div id='container' class='container-fluid'>
-    <div id='dashboard' class='row'>
-      <aside class='col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 container'>
-        <div class="input-group mb-3" id='search-bar'>
+  <div class='container'>
+    <div id='dashboard'>
+      <div class='row'>
+        <div class="input-group mb-4" id='search-bar'>
           <input type="text" class="form-control" placeholder="Search for a place here..."
-            aria-label="Search for a place here..." aria-describedby="button-addon2">
+            aria-label="Search for a place here..." aria-describedby="search-button" id='search-input'>
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            <button class="btn btn-dark" type="button" id="search-button">Search</button>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-12 col-sm-12 col-md-6 col-lg-12 col-xl-12 aside-div'>
-            <div id='weather-info-1' class="d-flex flex-column bd-highlight mb-3">
-              <img src='../src/demo.png' alt="#" class='rounded mx-auto d-block'>
-              <div class="p-2 bd-highlight">
-                <p id='temperature-0'>20 Celsius</p>
-                <p id='day-0' class='text-muted'>Monday</p>
-              </div>
-            </div>
+      </div>
+      <div class='row'>
+        <P class='d-none' id='error-msg'>Place not found.</P>
+      </div>
+      <div id='switch-div' class='section'>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="switch">
+          <label class="custom-control-label" for="switch" id='temp-switch'>°F</label>
+        </div>
+      </div>
+      <div class='section'>
+        <p id='city-name' class='section-title'></p>
+        <div class='weather-info row text-center container mx-auto'>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-0-img'></div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <p id='day-0'></p>
           </div>
-          <div class='col-12 col-sm-12 col-md-6 col-lg-12 col-xl-12 aside-div'>
-            <div id='weather-info-2' class="d-flex flex-column bd-highlight mb-3">
-              <div class="p-2 bd-highlight">
-                <p id='description-0'>Light rain</p>
-                <p id='rain-0' class='text-muted'><i class="fas fa-cloud-showers-heavy"></i>   <span>80%</span></p>
-              </div>
-              <div class='p-2 bd-highlight'>
-                <p id='city-info'>City, Country</p>
-              </div>
-            </div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <p id='day-0-description'></p>
+          </div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <p><i class="fas fa-thermometer-half"></i> <span id='day-0-temp'></span></p>
           </div>
         </div>
-      </aside>
-      <main class='col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12'>
-        <p class='main-title'>Week</p>
-        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons" id='toggle-temperature'>
-          <label class="btn btn-secondary active">
-            <input type="radio" name="options" id="option1" checked> °C
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option2"> °F
-          </label>
-        </div>
-        <div class='row'>
-          <div id='day-1' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
+      </div>
+      <div class='section'>
+        <p class='section-title'>Highlights</p>
+        <div class='weather-info row text-center container mx-auto'>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fas fa-caret-up"></i> Maximum</h5>
+              <p class="card-text" id='today-max'></p>
             </div>
           </div>
-          <div id='day-2' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fas fa-caret-down"></i> Minimum</h5>
+              <p class="card-text" id='today-min'></p>
             </div>
           </div>
-          <div id='day-3' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fas fa-wind"></i> Feels Like</h5>
+              <p class="card-text" id='today-feels-like'></p>
             </div>
           </div>
-          <div id='day-4' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
-            </div>
-          </div>
-          <div id='day-5' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
-            </div>
-          </div>
-          <div id='day-6' class='col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12'>
-            <div class="card text-muted">
-              <img src="../src/demo.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Day</h5>
-                <p><span class='max-week'>Max</span>   <span class='min-week'>Min</span></p>
-              </div>
+          <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="fas fa-tint"></i> Humidity</h5>
+              <p class="card-text" id='today-humidity'></p>
             </div>
           </div>
         </div>
-        <p class='main-title'>Highlights</p>
-        <div class='row'>
-          <div id='max-temp' class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6'>
-            <div class="card text-muted">
-              <div class="card-body">
-                <h5 class="card-title">Max. temperature</h5>
-                <p>Some temperature</p>
+      </div>
+      <div class='section'>
+        <p class='section-title'>Next 6 days</p>
+        <div class="d-flex flex-column">
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-1-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-1'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-1-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-1-temp'></span></p>
               </div>
             </div>
           </div>
-          <div id='min-temp' class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6'>
-            <div class="card text-muted">
-              <div class="card-body">
-                <h5 class="card-title">Min. temperature</h5>
-                <p>Some temperature</p>
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-2-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-2'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-2-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-2-temp'></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-3-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-3'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-3-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-3-temp'></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-4-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-4'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-4-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-4-temp'></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-5-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-5'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-5-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-5-temp'></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class='weather-info row text-center container mx-auto'>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><img id='day-6-img'></div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-6'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p id='day-6-description'></p>
+              </div>
+              <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                <p><i class="fas fa-thermometer-half"></i> <span id='day-6-temp'></span></p>
               </div>
             </div>
           </div>
         </div>
-        <div class='row mt-5'>
-          <div id='feels-like' class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6'>
-            <div class="card text-muted">
-              <div class="card-body">
-                <h5 class="card-title">Feels like</h5>
-                <p>Some temperature</p>
-              </div>
-            </div>
-          </div>
-          <div id='humidity' class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6'>
-            <div class="card text-muted">
-              <div class="card-body">
-                <h5 class="card-title">Humidity</h5>
-                <p>Some percentage</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </main>
+      </div>
     </div>
   </div>
+
   <script src="main.js"></script>
 </body>
 
