@@ -2,45 +2,178 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-  <title>Project: Weather App</title>
+  <meta charset="UTF-8">
+  <title>Weather App by Marcos Medeiros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-				integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/4ea4aea9be.js" crossorigin="anonymous"></script>
+  <link rel='stylesheet' href="../src/style/app.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<div id="container" class='container'>
-    <div class="jumbotron mt-5">
-      <h1 class="display-4">Weather App Project</h1>
-      <p class="lead">Get the current weather for any city you want!</p>
-      <hr class="my-4">
-      <p>Just type the name of your city below.</p>
-      <p class="lead">
-      <form class="form-inline">
-        <label class="sr-only">Name</label>
-        <input type="text" class="form-control mb-2 mr-sm-2" id="city-input" placeholder="Your city here...">
-        <a class="btn btn-primary btn mb-2" id="search-btn" role="button">Search</a>
-        <p id='error-msg' class='d-none'>City not found!</p>
-      </form>  
-      </p>
-    </div>
-    <div id='weather-data' class='d-none'>
-      <div class="card bg-dark">
-        <img src="" class="card-img-top" id='img'>
-        <div class="card-body">
-          <h5 class="card-title text-primary" id='city'></h5>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-secondary text-white" id='description'></li>
-            <li class="list-group-item bg-secondary text-white" id='temp'></li>
-            <li class="list-group-item bg-secondary text-white" id='humidity'></li>
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link text-primary" id='change-temp'></a>
+  <div class='container'>
+    <div id='dashboard'>
+      <div class='row'>
+        <div class="input-group mb-4" id='search-bar'>
+          <input type="text" class="form-control" placeholder="Search for a place here..."
+            aria-label="Search for a place here..." aria-describedby="search-button" id='search-input'>
+          <div class="input-group-append">
+            <button class="btn btn-dark" type="button" id="search-button">Search</button>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <p class='d-none' id='error-msg'>Place not found.</p>
+      </div>
+      <div id='initial-message' class='mx-auto text-center'>
+        <p>Use the search field above to look for a place.</p>
+      </div>
+      <div id='wrapper' class='d-none'>
+        <div id='switch-div' class='section'>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="switch">
+            <label class="custom-control-label" for="switch" id='temp-switch'>°C / °F</label>
+          </div>
+        </div>
+        <div class='section'>
+          <p id='city-name' class='section-title'></p>
+          <div class='weather-info row text-center container mx-auto'>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-0-img'></div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+              <p id='day-0'></p>
+            </div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-7 col-7">
+              <p id='day-0-description'></p>
+            </div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-5 col-5">
+              <p><i class="fas fa-thermometer-half"></i> <span id='day-0-temp'></span></p>
+            </div>
+          </div>
+        </div>
+        <div class='section'>
+          <p class='section-title'>Highlights</p>
+          <div class='weather-info row text-center container mx-auto'>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+              <div class="card-body text-center">
+                <h5 class="card-title"><i class="fas fa-caret-up"></i> Maximum</h5>
+                <p class="card-text" id='today-max'></p>
+              </div>
+            </div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+              <div class="card-body text-center">
+                <h5 class="card-title"><i class="fas fa-caret-down"></i> Minimum</h5>
+                <p class="card-text" id='today-min'></p>
+              </div>
+            </div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+              <div class="card-body text-center">
+                <h5 class="card-title"><i class="fas fa-wind"></i> Feels Like</h5>
+                <p class="card-text" id='today-feels-like'></p>
+              </div>
+            </div>
+            <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+              <div class="card-body text-center">
+                <h5 class="card-title"><i class="fas fa-tint"></i> Humidity</h5>
+                <p class="card-text" id='today-humidity'></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='section'>
+          <p class='section-title'>Next 6 days</p>
+          <div class="d-flex flex-column">
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-1-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-1'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-1-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-1-temp'></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-2-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-2'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-2-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-2-temp'></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-3-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-3'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-3-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-3-temp'></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-4-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-4'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-4-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-4-temp'></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-5-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-5'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-5-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-5-temp'></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-2">
+              <div class='weather-info row text-center container mx-auto'>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><img id='day-6-img'></div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-6'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p id='day-6-description'></p>
+                </div>
+                <div class="p-2 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                  <p><i class="fas fa-thermometer-half"></i> <span id='day-6-temp'></span></p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-	</div>
+  </div>
+
   <script src="main.js"></script>
 </body>
 
