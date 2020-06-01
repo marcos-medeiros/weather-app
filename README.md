@@ -1,6 +1,6 @@
 # Weather App Project - [Microverse - JavaScript Course]
 
-> ​ The Weather App Project is aimed at applying the knowledge of javascript, webpack, API's and HTML to create a basic weather app in which you can search for a given city and get its current weather. ​
+> The Weather App Project is aimed at applying the knowledge of javascript, webpack, API's and HTML to create a basic weather app in which you can search for a given city and get its current weather. ​
 
 
 ## Built With
@@ -26,6 +26,14 @@ Open your git bash and cd to the location you'd like to put your files the run t
 ```console
 git clone https://github.com/marcos-medeiros/weather-app.git
 ```
+After that, cd into the repository directory and run:
+
+```console
+npm i
+```
+Wait for all the dependencies to be installed and then you're ready to go.
+
+Open the index.html file from the dist folder in your browser and search for a place to know the weather for today and the next six days!
 
 ## Authors
 
