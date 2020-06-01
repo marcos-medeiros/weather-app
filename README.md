@@ -3,6 +3,9 @@
 > The Weather App Project is aimed at applying the knowledge of javascript, webpack, API's and HTML to create a basic weather app in which you can search for a given city and get its current weather. ​
 
 
+![Screenshot](screenshot.png?raw=true "AeroTest App")
+
+
 ## Built With
 
 - HTML
